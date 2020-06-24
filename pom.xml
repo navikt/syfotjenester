@@ -41,6 +41,7 @@
         </repository>
     </distributionManagement>
     <modules>
+        <module>jaxb-adapters</module>
         <module>sykefravaersoppfoelgingv1-tjenestespesifikasjon</module>
     </modules>
     <scm>
@@ -52,7 +53,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>no.nav.tjenestespesifikasjoner</groupId>
+                <groupId>no.nav.syfotjenester</groupId>
                 <artifactId>jaxb-adapters</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -161,7 +162,7 @@
                             <version>${org.jvnet.jaxb2.version}</version>
                         </dependency>
                         <dependency>
-                            <groupId>no.nav.tjenestespesifikasjoner</groupId>
+                            <groupId>no.nav.syfotjenester</groupId>
                             <artifactId>jaxb-adapters</artifactId>
                             <version>${project.version}</version>
                         </dependency>
