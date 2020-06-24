@@ -1,0 +1,11 @@
+.DS_Store
+.idea
+*.iml
+target
+bin
+.classpath
+.project
+.settings
+*/node_modules/
+rewrite
+travis/codesigning.asc
