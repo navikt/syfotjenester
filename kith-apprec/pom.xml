@@ -14,6 +14,23 @@
     </properties>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>${java.jdk.version}</source>
+                        <target>${java.jdk.version}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/xsd</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -58,11 +75,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/xsd</directory>
-            </resource>
-        </resources>
     </build>
 
     <dependencies>
