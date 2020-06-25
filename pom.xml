@@ -44,6 +44,7 @@
         <module>jaxb-adapters</module>
         <module>kith-apprec</module>
         <module>kith-base64</module>
+        <module>kith-dialogmelding</module>
         <module>sykefravaersoppfoelgingv1-tjenestespesifikasjon</module>
     </modules>
     <scm>
