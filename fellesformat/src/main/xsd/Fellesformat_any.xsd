@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.nav.no/xml/eiff/2/" xmlns:ff="http://www.nav.no/xml/eiff/2/" elementFormDefault="qualified">
+    <element name="EI_fellesformat">
+        <annotation>
+            <documentation>Dette er rotnoden i fellesformatet som inneholder nyttedata, mottaksblokk, sporingsinfo og eventuelt apprec </documentation>
+        </annotation>
+        <complexType>
+            <complexContent>
+                <restriction base="anyType">
+                    <sequence>
+                        <any minOccurs="0" maxOccurs="unbounded"/>
+                    </sequence>
+                </restriction>
+            </complexContent>
+        </complexType>
+    </element>
+    <element name="MottakenhetBlokk">
+        <complexType>
+            <annotation>
+                <documentation>Denne blokken inneholder informasjon generert i mottaket.</documentation>
+            </annotation>
+            <attribute name="ediLoggId">
+                <annotation>
+                    <documentation>En identifikator til en logg i mottaket som er slik at med denne kan man spore denne meldingen tilbake til avsender.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <whiteSpace value="preserve"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="avsender" type="string">
+                <annotation>
+                    <documentation>Dette er mottakets referanse for aa senere kunne finne tilbake til rett avsender av denne meldingen</documentation>
+                </annotation>
+            </attribute>
+            <attribute name="ebXMLSamtaleId" type="string">
+                <annotation>
+                    <documentation>Dette er ebXML meldingens correlation id (samtale id) som er unik for alle xml meldinger og svar med opphav i  samme melding.</documentation>
+                </annotation>
+            </attribute>
+            <attribute name="mottaksId" type="string">
+                <annotation>
+                    <documentation>Dette er ebXML-konvoluttens mottaksid.</documentation>
+                </annotation>
+            </attribute>
+            <attribute name="meldingsType" type="string">
+                <annotation>
+                    <documentation>Denne attributten viser den opprinnelige meldingens meldingstype.</documentation>
+                </annotation>
+            </attribute>
+            <attribute name="avsenderRef" type="string"/>
+            <attribute name="avsenderFnrFraDigSignatur">
+                <annotation>
+                    <documentation>Dette feltet inneholder fnr. til avsender av meldingen slik avsender er identifisert gjennom sin digitale signatur.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <whiteSpace value="collapse"/>
+                        <minLength value="11"/>
+                        <maxLength value="11"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="mottattDatotid" type="dateTime">
+                <annotation>
+                    <documentation>tidspunkt melding ble tatt til behandling av mottaket.</documentation>
+                </annotation>
+            </attribute>
+            <attribute name="orgNummer">
+                <simpleType>
+                    <restriction base="string">
+                        <minLength value="9"/>
+                        <maxLength value="9"/>
+                        <whiteSpace value="collapse"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="avsenderOrgNrFraDigSignatur">
+                <annotation>
+                    <documentation>Inneholder orgnummer hentet fra DN i virksomhetsertifikat brukt for signering av melding.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <whiteSpace value="collapse"/>
+                        <minLength value="9"/>
+                        <maxLength value="9"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="partnerReferanse">
+                <annotation>
+                    <documentation>Inneholder referranse til partner som ikke er helseforetak.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <whiteSpace value="collapse"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="herIdentifikator">
+                <annotation>
+                    <documentation>Inneholder referranse til helseforetak.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <whiteSpace value="collapse"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="ebRole">
+                <annotation>
+                    <documentation>Inneholder ebXML Role parameter ( Fra_Role ).</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <whiteSpace value="collapse"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="ebService">
+                <annotation>
+                    <documentation>Inneholder ebXML Service parameter.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <whiteSpace value="collapse"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="ebAction">
+                <annotation>
+                    <documentation>Inneholder ebXML Action parameter.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <whiteSpace value="collapse"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+        </complexType>
+    </element>
+</schema>

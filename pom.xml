@@ -41,6 +41,7 @@
         </repository>
     </distributionManagement>
     <modules>
+        <module>fellesformat</module>
         <module>jaxb-adapters</module>
         <module>kith-apprec</module>
         <module>kith-base64</module>
