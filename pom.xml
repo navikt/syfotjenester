@@ -42,6 +42,7 @@
     </distributionManagement>
     <modules>
         <module>jaxb-adapters</module>
+        <module>kith-base64</module>
         <module>sykefravaersoppfoelgingv1-tjenestespesifikasjon</module>
     </modules>
     <scm>
