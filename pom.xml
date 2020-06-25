@@ -42,6 +42,7 @@
     </distributionManagement>
     <modules>
         <module>adresseregisteretV1-tjenestespesifikasjon</module>
+        <module>fastlegeinformasjonV1-tjenestespesifikasjon</module>
         <module>fellesformat</module>
         <module>jaxb-adapters</module>
         <module>kith-apprec</module>
