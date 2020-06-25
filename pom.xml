@@ -41,6 +41,7 @@
         </repository>
     </distributionManagement>
     <modules>
+        <module>adresseregisteretV1</module>
         <module>fellesformat</module>
         <module>jaxb-adapters</module>
         <module>kith-apprec</module>
