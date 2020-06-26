@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/meldinger" xmlns:informasjon="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/informasjon" xmlns:meldinger="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/meldinger">
+  <xsd:import namespace="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/informasjon" schemaLocation="../informasjon/informasjon.xsd"/>
+  <xsd:complexType name="hentSykepengesoeknadListeResponse">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="sykepengesoeknadListe" type="informasjon:Sykepengesoeknad">
+        <xsd:annotation>
+          <xsd:documentation>Liste av brukers sykepengesøknader</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="hentSykepengesoeknadPdfResponse">
+    <xsd:sequence>
+      <xsd:element name="pdf" type="xsd:base64Binary">
+        <xsd:annotation>
+          <xsd:documentation>byte-array som representerer PDFen</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="beregnArbeidsgiverperiodeRequest">
+    <xsd:sequence>
+      <xsd:element name="sykepengesoeknadId" type="informasjon:Uuid">
+        <xsd:annotation>
+          <xsd:documentation>Sykepengesøknaden som arbeidsgiverperioden skal beregnes for</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="tilleggsperiodeArbeidsgiverperiodeberegning" type="informasjon:TilleggsperiodeArbeidsgiverperiodeberegning">
+        <xsd:annotation>
+          <xsd:documentation>Eventuelle tilleggsopplysninger som brukeren har gitt i utfyllingen av sykepengesøknaden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="hentSykepengesoeknadPdfRequest">
+    <xsd:sequence>
+      <xsd:element name="sykepengesoeknadId" type="informasjon:Uuid">
+        <xsd:annotation>
+          <xsd:documentation>Unik id for sykepengesøknaden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="hentNaermesteLedersSykepengesoeknadListeRequest">
+    <xsd:sequence>
+      <xsd:element name="naermesteLederId" type="xsd:long">
+        <xsd:annotation>
+          <xsd:documentation>Id som identifiserer koblingen mellom nærmeste leder og bruker</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="beregnArbeidsgiverperiodeResponse">
+    <xsd:sequence>
+      <xsd:element name="arbeidsgiverperiodeberegning" type="informasjon:Arbeidsgiverperiodeberegning">
+        <xsd:annotation>
+          <xsd:documentation>Resultatet av beregningen av arbeidsgiverperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="hentNaermesteLedersSykepengesoeknadListeResponse">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="sykepengesoeknadListe" type="informasjon:NaermesteLederSykepengesoeknad">
+        <xsd:annotation>
+          <xsd:documentation>Liste av sykepengesøknader som er tilgjengelig for nærmeste leder</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="hentSykepengesoeknadListeRequest">
+    <xsd:sequence>
+      <xsd:element name="aktoerId" type="informasjon:Identifikator">
+        <xsd:annotation>
+          <xsd:documentation>Brukers aktørId</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/informasjon" xmlns:informasjon="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/informasjon">
+  <xsd:simpleType name="Enumkonstant">
+    <xsd:annotation>
+      <xsd:documentation>Enum-string som kun tillater A-Z og _</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[A-Z_]{1,50}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="Periode">
+    <xsd:sequence>
+      <xsd:element name="fom" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Periodens fom-dato</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="tom" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Periodens tom-dato</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="AnnenInntektskildeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="ANDRE_ARBEIDSFORHOLD"/>
+      <xsd:enumeration value="SELVSTENDIG_NAERINGSDRIVENDE"/>
+      <xsd:enumeration value="SELVSTENDIG_NAERINGSDRIVENDE_DAGMAMMA"/>
+      <xsd:enumeration value="JORDBRUKER_FISKER_REINDRIFTSUTOEVER"/>
+      <xsd:enumeration value="FRILANSER"/>
+      <xsd:enumeration value="ANNET"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="Uuid">
+    <xsd:annotation>
+      <xsd:documentation>Id-string som kun tillater en UUID på 32 tegn</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="NaermesteLederSykepengesoeknad">
+    <xsd:complexContent>
+      <xsd:extension base="informasjon:Sykepengesoeknad">
+        <xsd:sequence>
+          <xsd:element name="naermesteLederStatus" type="informasjon:Enumkonstant">
+            <xsd:annotation>
+              <xsd:documentation>Viser om nærmeste leder har lest søknaden eller ikke</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Fravaer">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="harEgenmeldingsperiode" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker har svart på ja eller nei på spørsmålet om egenmeldinger</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="egenmeldingsperiodeListe" type="informasjon:Periode">
+        <xsd:annotation>
+          <xsd:documentation>Liste med perioder den sykmeldte brukte egenmeldingsdager</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="harFerie" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker har svart på ja eller nei på spørsmålet om ferie</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ferieListe" type="informasjon:Periode">
+        <xsd:annotation>
+          <xsd:documentation>Liste med perioder den sykmeldte tok ut ferie</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="harPermisjon" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker har svart på ja eller nei på spørsmålet om permisjon</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="permisjonListe" type="informasjon:Periode">
+        <xsd:annotation>
+          <xsd:documentation>Liste med perioder den sykmeldte hadde permisjon</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="harOppholdUtenforNorge" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker har svart på ja eller nei på spørsmålet om opphold utenfor Norge</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="harSoektOmSykepengerForOppholdet" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om den sykmeldte har søkt om sykepenger for oppholdet utenfor Norge</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="oppholdUtenforNorgeListe" type="informasjon:Periode">
+        <xsd:annotation>
+          <xsd:documentation>Liste med perioder den sykmeldte har oppholdt seg utenfor Norge</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Utdanning">
+    <xsd:sequence>
+      <xsd:element name="fom" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Fra og med-dato for når utdanningen startet</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="erFulltidsstudie" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om utdanningen er et fulltidsstudie</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="Identifikator">
+    <xsd:annotation>
+      <xsd:documentation>Felles identifikator</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+  <xsd:complexType name="KorrigertArbeidstid">
+    <xsd:sequence>
+      <xsd:element name="arbeidstimerNormaluke" type="xsd:double">
+        <xsd:annotation>
+          <xsd:documentation>Angir hvor mange timer den sykmeldte jobber i en normaluke</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="arbeidsgrad" type="xsd:int">
+        <xsd:annotation>
+          <xsd:documentation>Faktisk arbeidsgrad for sykmeldingsperioden, angitt i prosent</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="faktiskeArbeidstimer" type="xsd:double">
+        <xsd:annotation>
+          <xsd:documentation>Faktisk antall timer jobbet i sykmeldingsperioden, angitt i timer</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="beregnetArbeidsgrad" type="xsd:int">
+        <xsd:annotation>
+          <xsd:documentation>Arbeidsgrad beregnet fra faktiske arbeidstimer, angitt i prosent</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TilleggsperiodeArbeidsgiverperiodeberegning">
+    <xsd:sequence>
+      <xsd:element name="periodetype" type="informasjon:Enumkonstant">
+        <xsd:annotation>
+          <xsd:documentation>Hva slags periode denne tilleggsperioden representerer</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="periode" type="informasjon:Periode">
+        <xsd:annotation>
+          <xsd:documentation>Tilleggsperiodens fra- og til-dato</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Sykmeldingsperiode">
+    <xsd:sequence>
+      <xsd:element name="sykmeldingsperiodeId" type="xsd:long">
+        <xsd:annotation>
+          <xsd:documentation>Unik id på sykmeldingsperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="graderingsperiode" type="informasjon:Periode">
+        <xsd:annotation>
+          <xsd:documentation>Fom- og tom-dato for sykmeldingsperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="sykmeldingsgrad" type="xsd:int">
+        <xsd:annotation>
+          <xsd:documentation>Sykmeldingsgraden for sykmeldingsperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="harKorrigertArbeidstid" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker har svart på ja eller nei på spørsmålet om korrigert arbeidstid</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="korrigertArbeidstid" type="informasjon:KorrigertArbeidstid">
+        <xsd:annotation>
+          <xsd:documentation>Sykmeldtes korrigering basert på faktisk tid jobbet i sykmeldingsperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Arbeidsgiverperiodeberegning">
+    <xsd:sequence>
+      <xsd:element name="erUtenforArbeidsgiverperiode" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om sykefraværet strekker seg lenger enn arbeidsgiverperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="antallDagerISykefravaer" type="xsd:int">
+        <xsd:annotation>
+          <xsd:documentation>Beregnet antall dager i sykefraværet</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="ukjentPeriodeFoerSykefravaer" type="informasjon:Periode">
+        <xsd:annotation>
+          <xsd:documentation>Perioden i mellom det beregnede sykefraværet og ett eventuelt tidligere sykefravær</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="arbeidsgiverperiodeStartDato" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Startdato for arbeidsgiverperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Sykepengesoeknad">
+    <xsd:sequence>
+      <xsd:element name="sykepengesoeknadId" type="informasjon:Uuid">
+        <xsd:annotation>
+          <xsd:documentation>Unik id for denne sykepengesøknaden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="sykmeldingId" type="informasjon:Uuid">
+        <xsd:annotation>
+          <xsd:documentation>Unik id for symeldingen som denne sykepengesøknaden er knyttet til</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="korrigerer" type="informasjon:Uuid"/>
+      <xsd:element name="periode" type="informasjon:Periode">
+        <xsd:annotation>
+          <xsd:documentation>Perioden som denne sykepengesøknaden dekker. Ulik fra sykmeldingsperioden hvis sykmeldingsperioden er lang.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="opprettetDato" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Dato for opprettingen av sykmeldingen</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="avbruttDato" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Dato for når sykepengesøknaden ble avbrutt</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="forrigeSykeforloepTom" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Til- og med-dato for når det forrige sykeforløpet til den sykmeldte var ferdig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="forrigeSendteSoeknadTom" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Til- og med-dato i perioden til den forrige søknaden som ble sendt</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="sendtTilArbeidsgiverDato" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Dato for når søknaden ble sendt til arbeidsgiver. Blank hvis søknaden ikke er sendt til arbeidsgiver</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="sendtTilNAVDato" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Dato for når søknaden ble sendt til NAV. Blank hvis søknaden ikke er sendt til NAV</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="arbeidsgiverId" type="informasjon:Identifikator">
+        <xsd:annotation>
+          <xsd:documentation>Arbeidsgiveren til den sykmeldte</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="arbeidsgiverUtbetalerLoenn" type="informasjon:Enumkonstant">
+        <xsd:annotation>
+          <xsd:documentation>Om arbeidsgiver skal utbetale lønn dersom den sykmeldte er syk lenger enn 16 dager</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="identdato" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Dato for når det legemeldte fraværet begynte</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="sykmeldingSkrevetDato" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Dato for når den tilhørende sykmeldingen ble skrevet</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="harArbeidGjenopptattDato" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker har svart på ja eller nei på spørsmålet om arbeid er gjennopptatt</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="arbeidGjenopptattDato" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Dato for når sykmeldt gjenopptok arbeidet fullt ut</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="fravaer" type="informasjon:Fravaer">
+        <xsd:annotation>
+          <xsd:documentation>Informasjon om den sykmeldtes fravær i sykmeldingsperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" name="sykmeldingsperiodeListe" type="informasjon:Sykmeldingsperiode">
+        <xsd:annotation>
+          <xsd:documentation>Informasjon om den sykmeldtes aktiviteter i sykmeldingsperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="harAnnenInntektskilde" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker har svart på ja eller nei på spørsmålet om annen inntektskilde</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="annenInntektskildeListe" type="informasjon:AnnenInntektskilde">
+        <xsd:annotation>
+          <xsd:documentation>Informasjon om den sykmeldte har hatt andre inntektskilder enn den gjeldende i sykmeldingsperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="harUtdanning" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker har svart på ja eller nei på spørsmålet om utdanning</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="utdanning" type="informasjon:Utdanning">
+        <xsd:annotation>
+          <xsd:documentation>Informasjon om den sykmeldte har vært under utdanning i sykmeldingsperioden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="harBekreftetOpplysningsplikt" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Bekreftelse på at bruker er klar over at å oppgi uriktige opplysninger eller å holde tilbake informasjon kan har betydning for retten til sykepenger og at det kan føre til straffeansvar</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="harBekreftetKorrektInformasjon" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om bruker bekrefter at opplysningene gitt i søknaden er korrekte</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="status" type="informasjon:Enumkonstant">
+        <xsd:annotation>
+          <xsd:documentation>Status for søknaden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="del" type="xsd:int">
+        <xsd:annotation>
+          <xsd:documentation>Angir hvilken del av en oppdelt sykmeldingsperiode denne søknaden gjelder for</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="oppsummering" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Oppsummering av sykepengesøknaden i XML-format</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AnnenInntektskilde">
+    <xsd:sequence>
+      <xsd:element name="type" type="informasjon:AnnenInntektskildeType">
+        <xsd:annotation>
+          <xsd:documentation>Hva slags type arbeidsforhold denne andre inntektskilden er</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="erSykmeldt" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Om den sykmeldte er sykmeldt fra denne andre inntektskilden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

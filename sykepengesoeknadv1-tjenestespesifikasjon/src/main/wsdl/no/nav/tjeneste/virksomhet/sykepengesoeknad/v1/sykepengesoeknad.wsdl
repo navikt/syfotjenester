@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="sykepengesoeknad" targetNamespace="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1" xmlns:feil="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/feil" xmlns:meldinger="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/meldinger">
+      <xsd:import namespace="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/feil" schemaLocation="feil/feil.xsd"/>
+      <xsd:import namespace="http://nav.no/tjeneste/virksomhet/sykepengesoeknad/v1/meldinger" schemaLocation="meldinger/meldinger.xsd"/>
+      <xsd:element name="hentSykepengesoeknadListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="request" type="meldinger:hentSykepengesoeknadListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSykepengesoeknadListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="response" type="meldinger:hentSykepengesoeknadListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSykepengesoeknadListesikkerhetsbegrensning" type="feil:Sikkerhetsbegrensning"/>
+      <xsd:element name="hentNaermesteLedersSykepengesoeknadListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="request" type="meldinger:hentNaermesteLedersSykepengesoeknadListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentNaermesteLedersSykepengesoeknadListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="response" type="meldinger:hentNaermesteLedersSykepengesoeknadListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentNaermesteLedersSykepengesoeknadListesikkerhetsbegrensning" type="feil:Sikkerhetsbegrensning"/>
+      <xsd:element name="hentSykepengesoeknadPdf">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="request" type="meldinger:hentSykepengesoeknadPdfRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSykepengesoeknadPdfResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="response" type="meldinger:hentSykepengesoeknadPdfResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSykepengesoeknadPdfsikkerhetsbegrensning" type="feil:Sikkerhetsbegrensning"/>
+      <xsd:element name="beregnArbeidsgiverperiode">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="request" type="meldinger:beregnArbeidsgiverperiodeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="beregnArbeidsgiverperiodeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="response" type="meldinger:beregnArbeidsgiverperiodeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="beregnArbeidsgiverperiodesikkerhetsbegrensning" type="feil:Sikkerhetsbegrensning"/>
+      <xsd:element name="ping">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pingResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="hentSykepengesoeknadListeResponse">
+    <wsdl:part name="parameters" element="tns:hentSykepengesoeknadListeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hentSykepengesoeknadListeRequest">
+    <wsdl:part name="parameters" element="tns:hentSykepengesoeknadListe">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="beregnArbeidsgiverperiode_sikkerhetsbegrensning">
+    <wsdl:part name="sikkerhetsbegrensning" element="tns:beregnArbeidsgiverperiodesikkerhetsbegrensning">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hentSykepengesoeknadPdfRequest">
+    <wsdl:part name="parameters" element="tns:hentSykepengesoeknadPdf">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hentSykepengesoeknadListe_sikkerhetsbegrensning">
+    <wsdl:part name="sikkerhetsbegrensning" element="tns:hentSykepengesoeknadListesikkerhetsbegrensning">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hentSykepengesoeknadPdf_sikkerhetsbegrensning">
+    <wsdl:part name="sikkerhetsbegrensning" element="tns:hentSykepengesoeknadPdfsikkerhetsbegrensning">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="beregnArbeidsgiverperiodeRequest">
+    <wsdl:part name="parameters" element="tns:beregnArbeidsgiverperiode">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hentNaermesteLedersSykepengesoeknadListeRequest">
+    <wsdl:part name="parameters" element="tns:hentNaermesteLedersSykepengesoeknadListe">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hentSykepengesoeknadPdfResponse">
+    <wsdl:part name="parameters" element="tns:hentSykepengesoeknadPdfResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hentNaermesteLedersSykepengesoeknadListeResponse">
+    <wsdl:part name="parameters" element="tns:hentNaermesteLedersSykepengesoeknadListeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pingResponse">
+    <wsdl:part name="parameters" element="tns:pingResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="beregnArbeidsgiverperiodeResponse">
+    <wsdl:part name="parameters" element="tns:beregnArbeidsgiverperiodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hentNaermesteLedersSykepengesoeknadListe_sikkerhetsbegrensning">
+    <wsdl:part name="sikkerhetsbegrensning" element="tns:hentNaermesteLedersSykepengesoeknadListesikkerhetsbegrensning">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pingRequest">
+    <wsdl:part name="parameters" element="tns:ping">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Sykepengesoeknad_v1">
+    <wsdl:operation name="hentSykepengesoeknadListe">
+      <wsdl:documentation>Hent brukers nærmeste ledere </wsdl:documentation>
+      <wsdl:input message="tns:hentSykepengesoeknadListeRequest">
+      </wsdl:input>
+      <wsdl:output message="tns:hentSykepengesoeknadListeResponse">
+      </wsdl:output>
+      <wsdl:fault name="sikkerhetsbegrensning" message="tns:hentSykepengesoeknadListe_sikkerhetsbegrensning">
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="hentNaermesteLedersSykepengesoeknadListe">
+      <wsdl:documentation>Hent brukers nærmeste ledere </wsdl:documentation>
+      <wsdl:input message="tns:hentNaermesteLedersSykepengesoeknadListeRequest">
+      </wsdl:input>
+      <wsdl:output message="tns:hentNaermesteLedersSykepengesoeknadListeResponse">
+      </wsdl:output>
+      <wsdl:fault name="sikkerhetsbegrensning" message="tns:hentNaermesteLedersSykepengesoeknadListe_sikkerhetsbegrensning">
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="hentSykepengesoeknadPdf">
+      <wsdl:documentation>Hent brukers nærmeste ledere </wsdl:documentation>
+      <wsdl:input message="tns:hentSykepengesoeknadPdfRequest">
+      </wsdl:input>
+      <wsdl:output message="tns:hentSykepengesoeknadPdfResponse">
+      </wsdl:output>
+      <wsdl:fault name="sikkerhetsbegrensning" message="tns:hentSykepengesoeknadPdf_sikkerhetsbegrensning">
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="beregnArbeidsgiverperiode">
+      <wsdl:documentation>Hent brukers nærmeste ledere </wsdl:documentation>
+      <wsdl:input message="tns:beregnArbeidsgiverperiodeRequest">
+      </wsdl:input>
+      <wsdl:output message="tns:beregnArbeidsgiverperiodeResponse">
+      </wsdl:output>
+      <wsdl:fault name="sikkerhetsbegrensning" message="tns:beregnArbeidsgiverperiode_sikkerhetsbegrensning">
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ping">
+      <wsdl:input message="tns:pingRequest">
+      </wsdl:input>
+      <wsdl:output message="tns:pingResponse">
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

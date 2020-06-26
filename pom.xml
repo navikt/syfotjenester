@@ -51,6 +51,7 @@
         <module>kith-hodemelding</module>
         <module>partner-emottak</module>
         <module>sykefravaersoppfoelgingv1-tjenestespesifikasjon</module>
+        <module>sykepengesoeknadv1-tjenestespesifikasjon</module>
         <module>sykmeldingv1-tjenestespesifikasjon</module>
     </modules>
     <scm>
