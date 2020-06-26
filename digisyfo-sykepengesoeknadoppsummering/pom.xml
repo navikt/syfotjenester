@@ -9,8 +9,7 @@
     <artifactId>digisyfo-sykepengesoeknadoppsummering</artifactId>
     <version>0-SNAPSHOT</version>
     <properties>
-        <xsd.location>src/main/xsd</xsd.location>
-        <jaxb.location>src/main/xjb</jaxb.location>
+        <xsd.directory>src/main</xsd.directory>
     </properties>
 
     <build>
@@ -30,8 +29,8 @@
                 <configuration>
                     <extension>true</extension>
                     <arguments>-Xvalue-constructor -Xfluent-api</arguments>
-                    <schemaDirectory>${xsd.location}</schemaDirectory>
-                    <bindingDirectory>${jaxb.location}</bindingDirectory>
+                    <bindingDirectory>${xsd.directory}/xjb</bindingDirectory>
+                    <schemaDirectory>${xsd.directory}/xsd/no/nav/melding/virksomhet/sykepengesoeknadOppsummering/v1/sykepengesoeknadOppsummering</schemaDirectory>
                 </configuration>
                 <dependencies>
                     <dependency>
