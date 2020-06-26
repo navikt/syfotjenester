@@ -29,8 +29,6 @@
                 <configuration>
                     <extension>true</extension>
                     <arguments>-Xvalue-constructor -Xfluent-api</arguments>
-                    <bindingDirectory>${xsd.directory}/xjb</bindingDirectory>
-                    <schemaDirectory>${xsd.directory}/xsd/no/nav/melding/virksomhet/sykepengesoeknadOppsummering/v1/sykepengesoeknadOppsummering</schemaDirectory>
                 </configuration>
                 <dependencies>
                     <dependency>
