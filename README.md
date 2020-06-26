@@ -1,5 +1,3 @@
-# syfotjenester
-
 [![Build Status](https://github.com/navikt/syfotjenester/workflows/Release%20(Github%20Package%20Registry)/badge.svg)](https://github.com/navikt/syfotjenester/actions?query=workflow%3A%22Release+%28Github+Package+Registry%29%22)
 
 # Syfotjenester
