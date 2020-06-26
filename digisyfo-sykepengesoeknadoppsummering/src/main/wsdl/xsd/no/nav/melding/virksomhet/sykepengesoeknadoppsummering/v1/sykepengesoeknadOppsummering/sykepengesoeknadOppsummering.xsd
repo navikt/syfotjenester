@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav.no/melding/virksomhet/sykepengesoeknadOppsummering/v1/sykepengesoeknadOppsummering" xmlns:sykepengesoeknadOppsummering="http://nav.no/melding/virksomhet/sykepengesoeknadOppsummering/v1/sykepengesoeknadOppsummering">
+    <xsd:element name="sykepengesoeknadOppsummering" type="sykepengesoeknadOppsummering:sykepengesoeknadOppsummering">
+        <xsd:annotation>
+            <xsd:documentation>
+                <p>Rot-element for oppsummeringen av sykepengesøknaden</p>
+            </xsd:documentation>
+            <xsd:documentation/>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="Sporsmal">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="sporsmalstekst" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Spørsmålsteksten</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="svar" type="sykepengesoeknadOppsummering:Svar">
+                <xsd:annotation>
+                    <xsd:documentation>Svar på spørsmålet. Kan også inneholde ett eller flere underspørsmål</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="type" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>Spørsmålstype</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="Tilleggstekst">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="tekst" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Tilleggsteksten</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="type" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>Tilleggsteksttype</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="Svar">
+        <xsd:sequence>
+            <xsd:element name="tekst" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Svartekst</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="tilleggstekst" type="sykepengesoeknadOppsummering:Tilleggstekst">
+                <xsd:annotation>
+                    <xsd:documentation>Tilleggstekst til svaret</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="sporsmal" type="sykepengesoeknadOppsummering:Sporsmal">
+                <xsd:annotation>
+                    <xsd:documentation>Liste av underspørsmål</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="type" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation>Svartype</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="sykepengesoeknadOppsummering">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="gruppe" type="sykepengesoeknadOppsummering:Gruppe">
+                <xsd:annotation>
+                    <xsd:documentation>Liste av grupper som søknaden er delt inn i</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Gruppe">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="sporsmal" type="sykepengesoeknadOppsummering:Sporsmal">
+                <xsd:annotation>
+                    <xsd:documentation>Liste av spørsmål</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="tilleggstekst" type="sykepengesoeknadOppsummering:Tilleggstekst">
+                <xsd:annotation>
+                    <xsd:documentation>Liste av tilleggstekst</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation>Id for hvilken del av søknaden denne gruppen representerer</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+</xsd:schema>
