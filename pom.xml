@@ -41,10 +41,10 @@
         </repository>
     </distributionManagement>
     <modules>
-        <module>adresseregisteretV1-tjenestespesifikasjon</module>
+        <module>adresseregisteretv1-tjenestespesifikasjon</module>
         <module>aktorid-v2</module>
         <module>digisyfo-sykepengesoeknadoppsummering</module>
-        <module>fastlegeinformasjonV1-tjenestespesifikasjon</module>
+        <module>fastlegeinformasjonv1-tjenestespesifikasjon</module>
         <module>fellesformat</module>
         <module>jaxb-adapters</module>
         <module>kith-apprec</module>
