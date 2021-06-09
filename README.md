@@ -14,10 +14,33 @@ https://stackoverflow.com/questions/43574426/how-to-resolve-java-lang-noclassdef
 
 `mvn clean install`
 
+## Oppdatering av WSDL fra NHN
+
+WSDLer fra NHN må først konverteres til noe som kan brukes av NAV. Disse NAV-
+versjonene av WSDLene hentes fra pakker generert av Team Mellomvare. WSDLene
+må hentes ut fra maven-pakker og legges inn manuelt her i syfotjenester.
+Pakkene ligger på intern NAV Nexus her: http://maven.adeo.no/
+
+* no.nav.tjenester:ekstern-helse-fastlegeinformasjon-tjenestespesifikasjon
+* no.nav.tjenester:ekstern-helse-adresseregisteret-tjenestespesifikasjon
+
+For å generere disse nye interne NAV-WSDLene ta kontakt med Team Mellomvare.
+Nye WSDLer fra NHN ligger her:
+
+* https://register-at.test.nhn.no/docs/arkitektur/register/flr.html
+* https://register-at.test.nhn.no/docs/arkitektur/register/ar.html
+
+NHN har fire hovedleveranser i året, WSDLene oppdateres med endringer relevante
+for NAV på omtrent en av disse fire, altså en gang i året. Følg med
+på #ext-nav-grunndata og
+https://www.nhn.no/samhandlingsplattform/grunndata/leveranseplaner-for-grunndata
+for å få oppdateringer på når  endringene er i testmiljø og når de skal
+prodsettes.
+
 ## Gjøre endringer, release
 
 For å endre spesifikasjoner, lag en branch. Kjør bygget lokalt, da vil du
-få siste endringer med `1-SNAPSHOT` som versjon. Test med en konsument at
+få siste endringer med `0-SNAPSHOT` som versjon. Test med en konsument at
 endringene fungerer (sett versjon av tjenestespesifikasjoner til `0-SNAPSHOT` i konsumenten.)
 Når testingen er ferdig, send en pull request til dette repoet.
 
