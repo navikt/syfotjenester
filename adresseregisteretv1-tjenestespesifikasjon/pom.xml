@@ -6,7 +6,7 @@
         <version>0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>adresseregisteretV1-tjenestespesifikasjon</artifactId>
+    <artifactId>adresseregisteretv1-tjenestespesifikasjon</artifactId>
     <version>0-SNAPSHOT</version>
 
     <properties>
