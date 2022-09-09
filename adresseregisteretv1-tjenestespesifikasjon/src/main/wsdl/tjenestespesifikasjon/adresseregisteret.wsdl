@@ -1082,6 +1082,20 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="GetFallbackCertificates">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="herId" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFallbackCertificatesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="GetFallbackCertificatesResult" nillable="true" type="q153:CertificateSearchResult" xmlns:q153="http://register.nhn.no/CertificateSearchResult"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="GetLdapSearchProviders">
 				<xs:complexType>
 					<xs:sequence/>
@@ -1090,7 +1104,7 @@
 			<xs:element name="GetLdapSearchProvidersResponse">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element minOccurs="0" name="GetLdapSearchProvidersResult" nillable="true" type="q153:ArrayOfLdapSearchProvider" xmlns:q153="http://register.nhn.no/CertificateSearchResult"/>
+						<xs:element minOccurs="0" name="GetLdapSearchProvidersResult" nillable="true" type="q154:ArrayOfLdapSearchProvider" xmlns:q154="http://register.nhn.no/CertificateSearchResult"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1110,14 +1124,14 @@
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element minOccurs="0" name="herId" type="xs:int"/>
-						<xs:element minOccurs="0" name="code" nillable="true" type="q154:Code" xmlns:q154="http://register.nhn.no/Common"/>
+						<xs:element minOccurs="0" name="code" nillable="true" type="q155:Code" xmlns:q155="http://register.nhn.no/Common"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="AddCustomAttributeResponse">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element minOccurs="0" name="AddCustomAttributeResult" nillable="true" type="q155:Code" xmlns:q155="http://register.nhn.no/Common"/>
+						<xs:element minOccurs="0" name="AddCustomAttributeResult" nillable="true" type="q156:Code" xmlns:q156="http://register.nhn.no/Common"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1125,7 +1139,7 @@
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element minOccurs="0" name="herId" type="xs:int"/>
-						<xs:element minOccurs="0" name="code" nillable="true" type="q156:Code" xmlns:q156="http://register.nhn.no/Common"/>
+						<xs:element minOccurs="0" name="code" nillable="true" type="q157:Code" xmlns:q157="http://register.nhn.no/Common"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1137,14 +1151,14 @@
 			<xs:element name="GetCustomAttributes">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element minOccurs="0" name="herIds" nillable="true" type="q157:ArrayOfint" xmlns:q157="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+						<xs:element minOccurs="0" name="herIds" nillable="true" type="q158:ArrayOfint" xmlns:q158="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="GetCustomAttributesResponse">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element minOccurs="0" name="GetCustomAttributesResult" nillable="true" type="q158:ArrayOfKeyValuePairOfintArrayOfCodeUO9uWExd" xmlns:q158="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+						<xs:element minOccurs="0" name="GetCustomAttributesResult" nillable="true" type="q159:ArrayOfKeyValuePairOfintArrayOfCodeUO9uWExd" xmlns:q159="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1152,7 +1166,7 @@
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element minOccurs="0" name="herId" type="xs:int"/>
-						<xs:element minOccurs="0" name="coverageAreas" nillable="true" type="q159:ArrayOfCoverageInfo" xmlns:q159="http://register.nhn.no/CommunicationParty"/>
+						<xs:element minOccurs="0" name="coverageAreas" nillable="true" type="q160:ArrayOfCoverageInfo" xmlns:q160="http://register.nhn.no/CommunicationParty"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -1564,6 +1578,7 @@
 				<xs:sequence>
 					<xs:element minOccurs="0" name="CertificateSerialNumber" nillable="true" type="xs:string"/>
 					<xs:element minOccurs="0" name="CnName" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="FallbackSource" type="tns:CertificateFallbackSource"/>
 					<xs:element minOccurs="0" name="NotAfter" type="q1:DateTimeOffset" xmlns:q1="http://schemas.datacontract.org/2004/07/System"/>
 					<xs:element minOccurs="0" name="NotBefore" type="q2:DateTimeOffset" xmlns:q2="http://schemas.datacontract.org/2004/07/System"/>
 					<xs:element minOccurs="0" name="ValidForEncryption" type="xs:boolean"/>
@@ -1571,6 +1586,16 @@
 				</xs:sequence>
 			</xs:complexType>
 			<xs:element name="CertificateCandidate" nillable="true" type="tns:CertificateCandidate"/>
+			<xs:simpleType name="CertificateFallbackSource">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="None"/>
+					<xs:enumeration value="OrgName"/>
+					<xs:enumeration value="OrgNo"/>
+					<xs:enumeration value="ComPartName"/>
+					<xs:enumeration value="ParentName"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="CertificateFallbackSource" nillable="true" type="tns:CertificateFallbackSource"/>
 			<xs:complexType name="ArrayOfLdapSearchProvider">
 				<xs:sequence>
 					<xs:element minOccurs="0" maxOccurs="unbounded" name="LdapSearchProvider" nillable="true" type="tns:LdapSearchProvider"/>
@@ -2016,6 +2041,18 @@
 	<wsdl:message name="ICommunicationPartyService_SearchCertificatesByLdapUrl_ValidationFaultFault_FaultMessage">
 		<wsdl:part name="detail" element="q60:ValidationFault" xmlns:q60="http://register.nhn.no/Common"/>
 	</wsdl:message>
+	<wsdl:message name="ICommunicationPartyService_GetFallbackCertificates_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetFallbackCertificates"/>
+	</wsdl:message>
+	<wsdl:message name="ICommunicationPartyService_GetFallbackCertificates_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetFallbackCertificatesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICommunicationPartyService_GetFallbackCertificates_GenericFaultFault_FaultMessage">
+		<wsdl:part name="detail" element="q61:GenericFault" xmlns:q61="http://register.nhn.no/Common"/>
+	</wsdl:message>
+	<wsdl:message name="ICommunicationPartyService_GetFallbackCertificates_ValidationFaultFault_FaultMessage">
+		<wsdl:part name="detail" element="q62:ValidationFault" xmlns:q62="http://register.nhn.no/Common"/>
+	</wsdl:message>
 	<wsdl:message name="ICommunicationPartyService_GetLdapSearchProviders_InputMessage">
 		<wsdl:part name="parameters" element="tns:GetLdapSearchProviders"/>
 	</wsdl:message>
@@ -2023,10 +2060,10 @@
 		<wsdl:part name="parameters" element="tns:GetLdapSearchProvidersResponse"/>
 	</wsdl:message>
 	<wsdl:message name="ICommunicationPartyService_GetLdapSearchProviders_GenericFaultFault_FaultMessage">
-		<wsdl:part name="detail" element="q61:GenericFault" xmlns:q61="http://register.nhn.no/Common"/>
+		<wsdl:part name="detail" element="q63:GenericFault" xmlns:q63="http://register.nhn.no/Common"/>
 	</wsdl:message>
 	<wsdl:message name="ICommunicationPartyService_GetLdapSearchProviders_ValidationFaultFault_FaultMessage">
-		<wsdl:part name="detail" element="q62:ValidationFault" xmlns:q62="http://register.nhn.no/Common"/>
+		<wsdl:part name="detail" element="q64:ValidationFault" xmlns:q64="http://register.nhn.no/Common"/>
 	</wsdl:message>
 	<wsdl:message name="ICommunicationPartyService_GetAllHFCommpartiesCsv_InputMessage">
 		<wsdl:part name="parameters" element="tns:GetAllHFCommpartiesCsv"/>
@@ -2041,7 +2078,7 @@
 		<wsdl:part name="parameters" element="tns:AddCustomAttributeResponse"/>
 	</wsdl:message>
 	<wsdl:message name="ICommunicationPartyService_AddCustomAttribute_GenericFaultFault_FaultMessage">
-		<wsdl:part name="detail" element="q63:GenericFault" xmlns:q63="http://register.nhn.no/Common"/>
+		<wsdl:part name="detail" element="q65:GenericFault" xmlns:q65="http://register.nhn.no/Common"/>
 	</wsdl:message>
 	<wsdl:message name="ICommunicationPartyService_RemoveCustomAttribute_InputMessage">
 		<wsdl:part name="parameters" element="tns:RemoveCustomAttribute"/>
@@ -2050,7 +2087,7 @@
 		<wsdl:part name="parameters" element="tns:RemoveCustomAttributeResponse"/>
 	</wsdl:message>
 	<wsdl:message name="ICommunicationPartyService_RemoveCustomAttribute_GenericFaultFault_FaultMessage">
-		<wsdl:part name="detail" element="q64:GenericFault" xmlns:q64="http://register.nhn.no/Common"/>
+		<wsdl:part name="detail" element="q66:GenericFault" xmlns:q66="http://register.nhn.no/Common"/>
 	</wsdl:message>
 	<wsdl:message name="ICommunicationPartyService_GetCustomAttributes_InputMessage">
 		<wsdl:part name="parameters" element="tns:GetCustomAttributes"/>
@@ -2280,6 +2317,12 @@
 			<wsdl:output wsam:Action="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/SearchCertificatesByLdapUrlResponse" message="tns:ICommunicationPartyService_SearchCertificatesByLdapUrl_OutputMessage"/>
 			<wsdl:fault wsam:Action="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/SearchCertificatesByLdapUrlGenericFaultFault" name="GenericFaultFault" message="tns:ICommunicationPartyService_SearchCertificatesByLdapUrl_GenericFaultFault_FaultMessage"/>
 			<wsdl:fault wsam:Action="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/SearchCertificatesByLdapUrlValidationFaultFault" name="ValidationFaultFault" message="tns:ICommunicationPartyService_SearchCertificatesByLdapUrl_ValidationFaultFault_FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetFallbackCertificates">
+			<wsdl:input wsam:Action="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetFallbackCertificates" message="tns:ICommunicationPartyService_GetFallbackCertificates_InputMessage"/>
+			<wsdl:output wsam:Action="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetFallbackCertificatesResponse" message="tns:ICommunicationPartyService_GetFallbackCertificates_OutputMessage"/>
+			<wsdl:fault wsam:Action="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetFallbackCertificatesGenericFaultFault" name="GenericFaultFault" message="tns:ICommunicationPartyService_GetFallbackCertificates_GenericFaultFault_FaultMessage"/>
+			<wsdl:fault wsam:Action="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetFallbackCertificatesValidationFaultFault" name="ValidationFaultFault" message="tns:ICommunicationPartyService_GetFallbackCertificates_ValidationFaultFault_FaultMessage"/>
 		</wsdl:operation>
 		<wsdl:operation name="GetLdapSearchProviders">
 			<wsdl:input wsam:Action="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetLdapSearchProviders" message="tns:ICommunicationPartyService_GetLdapSearchProviders_InputMessage"/>
@@ -2831,6 +2874,21 @@
 		</wsdl:operation>
 		<wsdl:operation name="SearchCertificatesByLdapUrl">
 			<soap12:operation soapAction="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/SearchCertificatesByLdapUrl" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GenericFaultFault">
+				<soap12:fault use="literal" name="GenericFaultFault" namespace=""/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultFault">
+				<soap12:fault use="literal" name="ValidationFaultFault" namespace=""/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetFallbackCertificates">
+			<soap12:operation soapAction="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetFallbackCertificates" style="document"/>
 			<wsdl:input>
 				<soap12:body use="literal"/>
 			</wsdl:input>
@@ -3445,6 +3503,21 @@
 				<soap12:fault use="literal" name="ValidationFaultFault" namespace=""/>
 			</wsdl:fault>
 		</wsdl:operation>
+		<wsdl:operation name="GetFallbackCertificates">
+			<soap12:operation soapAction="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetFallbackCertificates" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GenericFaultFault">
+				<soap12:fault use="literal" name="GenericFaultFault" namespace=""/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultFault">
+				<soap12:fault use="literal" name="ValidationFaultFault" namespace=""/>
+			</wsdl:fault>
+		</wsdl:operation>
 		<wsdl:operation name="GetLdapSearchProviders">
 			<soap12:operation soapAction="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetLdapSearchProviders" style="document"/>
 			<wsdl:input>
@@ -4046,6 +4119,21 @@
 				<soap:fault use="literal" name="ValidationFaultFault" namespace=""/>
 			</wsdl:fault>
 		</wsdl:operation>
+		<wsdl:operation name="GetFallbackCertificates">
+			<soap:operation soapAction="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetFallbackCertificates" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GenericFaultFault">
+				<soap:fault use="literal" name="GenericFaultFault" namespace=""/>
+			</wsdl:fault>
+			<wsdl:fault name="ValidationFaultFault">
+				<soap:fault use="literal" name="ValidationFaultFault" namespace=""/>
+			</wsdl:fault>
+		</wsdl:operation>
 		<wsdl:operation name="GetLdapSearchProviders">
 			<soap:operation soapAction="http://register.nhn.no/CommunicationParty/ICommunicationPartyService/GetLdapSearchProviders" style="document"/>
 			<wsdl:input>
@@ -4114,23 +4202,8 @@
 		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="CommunicationParty">
-		<wsdl:port name="WSHttpBinding_ICommunicationPartyService" binding="tns:WSHttpBinding_ICommunicationPartyService">
-			<soap12:address location="https://register-at.test.nhn.no/v1/AR"/>
-			<wsa10:EndpointReference>
-				<wsa10:Address>https://register-at.test.nhn.no/v1/AR</wsa10:Address>
-			</wsa10:EndpointReference>
-		</wsdl:port>
-		<wsdl:port name="NetTcpBinding_ICommunicationPartyService" binding="tns:NetTcpBinding_ICommunicationPartyService">
-			<soap12:address location="net.tcp://ws-at.test.nhn.no:9876/v1/AR"/>
-			<wsa10:EndpointReference>
-				<wsa10:Address>net.tcp://ws-at.test.nhn.no:9876/v1/AR</wsa10:Address>
-				<Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-					<Dns>ws-at.test.nhn.no</Dns>
-				</Identity>
-			</wsa10:EndpointReference>
-		</wsdl:port>
 		<wsdl:port name="BasicHttpBinding_ICommunicationPartyService" binding="tns:BasicHttpBinding_ICommunicationPartyService">
-			<soap:address location="https://register-at.test.nhn.no/v1/AR/Basic"/>
+			<soap:address location="https://ws-web.test.nhn.no/v1/AR/Basic"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
